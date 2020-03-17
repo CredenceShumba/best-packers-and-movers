@@ -4,6 +4,6 @@ public class User {
 	
 	private String userName;
 	//just a comment
-	
+	private String userType;
 
 }
