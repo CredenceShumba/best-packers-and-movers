@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.nttdata.bestpackersandmovers.exception.CustomerNotFoundException;
 import com.nttdata.bestpackersandmovers.model.Customer;
 import com.nttdata.bestpackersandmovers.service.CustomerService;
 
@@ -56,13 +57,22 @@ public class CustomerController {
 	 * Get a Customer object using the id param
 	 * 
 	 * @param id
-	 * @return Customer object
+	 * @return Customer found object or exception
 	 */
 	@GetMapping("/{id}")
 	public Customer getCustomer(@PathVariable("id") Integer id) {
 		
 		logger.info("GET a customer REST call");
-		return customerService.getCustomer(id);
+		Customer customer = customerService.getCustomer(id);
+		
+		if(customer.getId() == null)
+		{
+			throw new CustomerNotFoundException(id);
+		}
+		else {
+			return customer;
+		}
+		
 	}
 
 	/**
