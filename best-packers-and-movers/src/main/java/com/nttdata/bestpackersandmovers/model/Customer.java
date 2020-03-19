@@ -8,11 +8,8 @@ import javax.validation.constraints.Size;
  * @author SHUMBC
  *
  */
-//@Entity
 public class Customer {
 
-	//@Id
-	//@GeneratedValue
 	private Integer id;
 	@NotNull(message = "Username cannot be null")
 	@Size(min = 1, message = "Enter a valid username")
@@ -37,6 +34,24 @@ public class Customer {
 
 	public Customer() {
 		super();
+	}
+	
+	public Customer(@NotNull(message = "Username cannot be null") @Size(min = 1, message = "Enter a valid username") String username,
+			@NotNull(message = "Email cannot be null") @Size(min = 8, message = "Enter a valid email") String email,
+			@NotNull(message = "Password cannot be null") @Size(min = 8, message = "Enter a valid password, 8 char long") String password,
+			@NotNull(message = "User type cannot be null") @Size(min = 1, message = "Enter a valid user type") String userType,
+			@NotNull(message = "First name cannot be null") @Size(min = 1, message = "Enter a valid first name") String firstName,
+			@NotNull(message = "Last name cannot be null") @Size(min = 1, message = "Enter a valid last name") String lastName,
+			@NotNull(message = "Address cannot be null") Address address) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.email = email;
+		this.password = password;
+		this.userType = userType;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.address = address;
 	}
 
 	public Customer(Integer id,
