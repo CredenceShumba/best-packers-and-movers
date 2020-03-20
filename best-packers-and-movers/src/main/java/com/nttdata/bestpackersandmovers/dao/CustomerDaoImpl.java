@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.nttdata.bestpackersandmovers.factory.CustomerFactory;
 import com.nttdata.bestpackersandmovers.model.Customer;
+import com.nttdata.bestpackersandmovers.util.LoggerUtil;
 
 /**
  * Data access object class implements CustomerDao interface
@@ -64,6 +65,7 @@ public class CustomerDaoImpl implements CustomerDao {
 			}
 		}
 		logger.info("A GET call retrieved a customer: retrieveCustomer()");
+		LoggerUtil.createPdf("C:\\Users\\SHUMBC\\ThatLocation\\Log.pdf", customer.getLastName());
 		return customer;
 	}
 

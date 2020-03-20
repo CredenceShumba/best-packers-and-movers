@@ -44,7 +44,6 @@ public class Customer {
 			@NotNull(message = "Last name cannot be null") @Size(min = 1, message = "Enter a valid last name") String lastName,
 			@NotNull(message = "Address cannot be null") Address address) {
 		super();
-		this.id = id;
 		this.username = username;
 		this.email = email;
 		this.password = password;

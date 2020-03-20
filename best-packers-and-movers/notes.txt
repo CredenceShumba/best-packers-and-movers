@@ -10,5 +10,4 @@
 }
 ##above still not fixed or check status in the credence-v2-collections notes
 
-##Current implementation working fine for the first CustomerNotFoundException
-which I want to add to the DELETE and PUT calls as well, then create new custom exceptions for POST as well
+##Current implementation writes to the pdf files when the getCustomer is called
