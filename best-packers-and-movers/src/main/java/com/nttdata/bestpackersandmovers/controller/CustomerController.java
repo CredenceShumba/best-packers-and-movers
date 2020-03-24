@@ -2,8 +2,6 @@ package com.nttdata.bestpackersandmovers.controller;
 
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.nttdata.bestpackersandmovers.exception.CustomerNotFoundException;
 import com.nttdata.bestpackersandmovers.model.Customer;
 import com.nttdata.bestpackersandmovers.service.CustomerService;
+import com.nttdata.bestpackersandmovers.util.LoggerUtil;
 
 /**
  * @author SHUMBC
@@ -27,9 +26,6 @@ import com.nttdata.bestpackersandmovers.service.CustomerService;
 @RestController
 @RequestMapping("/customers")
 public class CustomerController {
-	
-	// used to log method calls into the console
-	private static final Logger logger = LoggerFactory.getLogger(CustomerController.class);
 
 	@Autowired
 	private CustomerService customerService;
@@ -44,10 +40,10 @@ public class CustomerController {
 	public ResponseEntity<String> registerCustomer(@RequestBody Customer customer) {
 
 		if (customerService.registerCustomer(customer)) {
-			logger.info("Successful POST to create a customer REST call");
+			LoggerUtil.logAction("Successful POST to create a customer REST call");
 			return new ResponseEntity<String>("Customer registered successfully", HttpStatus.CREATED);
 		} else {
-			logger.info("Failed POST to create a customer REST call");
+			LoggerUtil.logAction("Failed POST to create a customer REST call");
 			// #########will need a customer exception and response here
 			return new ResponseEntity<String>("Customer registration failed", HttpStatus.I_AM_A_TEAPOT);
 		}
@@ -61,18 +57,16 @@ public class CustomerController {
 	 */
 	@GetMapping("/{id}")
 	public Customer getCustomer(@PathVariable("id") Integer id) {
-		
-		logger.info("GET a customer REST call");
+
+		LoggerUtil.logAction("GET a customer REST call");
 		Customer customer = customerService.getCustomer(id);
-		
-		if(customer.getId() == null)
-		{
+
+		if (customer.getId() == null) {
 			throw new CustomerNotFoundException(id);
-		}
-		else {
+		} else {
 			return customer;
 		}
-		
+
 	}
 
 	/**
@@ -86,10 +80,10 @@ public class CustomerController {
 	public ResponseEntity<String> updateCustomer(@PathVariable("id") Integer id, @RequestBody Customer customer) {
 
 		if (customerService.updateCustomer(id, customer)) {
-			logger.info("Successful UPDATE a customer REST call");
+			LoggerUtil.logAction("Successful UPDATE a customer REST call");
 			return new ResponseEntity<String>("Customer @id " + id + " updated successfully", HttpStatus.OK);
 		} else {
-			logger.info("Failed UPDATE a customer REST call");
+			LoggerUtil.logAction("Failed UPDATE a customer REST call");
 			return new ResponseEntity<String>("Customer update failed", HttpStatus.I_AM_A_TEAPOT);
 		}
 	}
@@ -104,13 +98,12 @@ public class CustomerController {
 	public ResponseEntity<String> deleteCustomer(@PathVariable("id") Integer id) {
 
 		if (customerService.deleteCustomer(id)) {
-			logger.info("Successful DELETE a customer REST call");
+			LoggerUtil.logAction("Successful DELETE a customer REST call");
 			return new ResponseEntity<String>("Customer @id " + id + " deleted successfully", HttpStatus.OK);
 		} else {
-			logger.info("Failed DELETE a customer REST call");
+			LoggerUtil.logAction("Failed DELETE a customer REST call");
 			return new ResponseEntity<String>("Customer delete failed", HttpStatus.I_AM_A_TEAPOT);
 		}
-
 	}
 
 	/**
@@ -120,7 +113,7 @@ public class CustomerController {
 	 */
 	@GetMapping
 	public List<Customer> getAllCustomers() {
-		logger.info("GET all customer REST call");
+		LoggerUtil.logAction("GET all customer REST call");
 		return customerService.getAllCustomers();
 	}
 

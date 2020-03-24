@@ -10,4 +10,9 @@
 }
 ##above still not fixed or check status in the credence-v2-collections notes
 
-##Current implementation writes to the pdf files when the getCustomer is called
+##Current implementation generates a swagger and java doc
+swagger url http://localhost:8080/swagger-ui.html#/
+
+
+24/03/2020######################################
+1. To do or research how to format the pdf
